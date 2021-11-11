@@ -1,6 +1,7 @@
 {
   "name": "vue-components-markdown",
   "version": "0.0.1",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-components-markdown src/index.js",
