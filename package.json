@@ -1,7 +1,14 @@
 {
   "name": "vue-components-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
+  "description": "Runtime markdown processor with support for injecting your custom Vue components into your markdown text.",
+  "author": "Ivan Jolic <ivan.jolic1995@gmail.com>",
+  "main": "dist/vue-components-markdown.common.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-components-markdown src/index.js",
