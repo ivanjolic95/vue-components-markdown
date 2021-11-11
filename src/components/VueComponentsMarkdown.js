@@ -10,6 +10,7 @@ function getPropValue(prop, variables) {
 }
 
 function extractComponentConfig(component, variables) {
+  // split only by first space
   const componentConfig = component
     .match(/[^!<>]*/g)
     .filter(Boolean)[0]
@@ -36,7 +37,6 @@ function renderComponent(
   componentWrapperTag,
   componentWrapperClass
 ) {
-  // split only by first space
   const { componentName, componentProps } = extractComponentConfig(
     component,
     variables

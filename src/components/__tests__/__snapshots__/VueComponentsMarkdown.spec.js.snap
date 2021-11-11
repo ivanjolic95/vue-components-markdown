@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VueComponentsMarkdown Rendering renders properly 1`] = `
+<div
+  class="VueComponentsMarkdown"
+>
+  <div>
+    <h1>
+      This is a title
+    </h1>
+    
+
+    <p>
+      This is a 
+      <strong>
+        test
+      </strong>
+      .
+    </p>
+    
+
+  </div>
+  <div
+    class=""
+  >
+    <div
+      class="MyComponent"
+    >
+      <h1>
+        Title
+      </h1>
+      <p>
+        This is my custom text passed as a variable.
+      </p>
+      <button>
+        My button
+      </button>
+    </div>
+  </div>
+  <div>
+    <p>
+      Another regular markdown paragraph. This time with list items:
+    </p>
+    
+
+    <ul>
+      
+
+      <li>
+        first
+      </li>
+      
+
+      <li>
+        second
+      </li>
+      
+
+      <li>
+        third
+
+        <ul>
+          
+
+          <li>
+            subitem
+          </li>
+          
+
+        </ul>
+        
+
+      </li>
+      
+
+    </ul>
+    
+
+    <p>
+      And back to the custom component:
+    </p>
+    
+
+  </div>
+  <div
+    class=""
+  >
+    <div
+      class="MyComponent"
+    >
+      <h1>
+        Title
+      </h1>
+      <p>
+        This is my custom text passed as a variable.
+      </p>
+      <button>
+        My button
+      </button>
+    </div>
+  </div>
+  <div />
+</div>
+`;
