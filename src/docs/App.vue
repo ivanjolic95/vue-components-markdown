@@ -67,15 +67,15 @@ Vue.use(VueComponentsMarkdownPlugin)
 
 ## Props
 
-| Name                     | Required  | Default value | Description                                                  |
-| ------------------------ | --------- | ------------- | ------------------------------------------------------------ |
-| content                  | \`false\` | \`''\`        | Markdown content to be rendered                              |
-| component-map            | \`false\` | \`{}\`        | Used for rendering custom components in markdown content     |
-| variables                | \`false\` | \`{}\`        | Used for injecting variables in markdown content             |
-| no-component-wrapper     | \`false\` | \`false\`     | If \`true\` custom components won't be rendered in a wrapper |
-| component-wrapper-tag    | \`false\` | \`'div'\`     | If wrapper is rendered, this tag will be used for it         |
-| component-wrapper-class  | \`false\` | \`''\`        | If wrapper is rendered, this class will be added to it       |
-| markdown-processor-props | \`false\` | \`{}\`        | Props passed to default markdown processor \`vue-markdown\`  |
+| Name                     | Type    | Required  | Default value | Description                                                  |
+| ------------------------ | ------- | --------- | ------------- | ------------------------------------------------------------ |
+| content                  | String  | \`false\` | \`''\`        | Markdown content to be rendered                              |
+| component-map            | Object  | \`false\` | \`{}\`        | Used for rendering custom components in markdown content     |
+| variables                | Object  | \`false\` | \`{}\`        | Used for injecting variables in markdown content             |
+| no-component-wrapper     | Boolean | \`false\` | \`false\`     | If \`true\` custom components won't be rendered in a wrapper |
+| component-wrapper-tag    | String  | \`false\` | \`'div'\`     | If wrapper is rendered, this tag will be used for it         |
+| component-wrapper-class  | String  | \`false\` | \`''\`        | If wrapper is rendered, this class will be added to it       |
+| markdown-processor-props | Object  | \`false\` | \`{}\`        | Props passed to default markdown processor \`vue-markdown\`  |
 
 ### \`content\` prop
 
