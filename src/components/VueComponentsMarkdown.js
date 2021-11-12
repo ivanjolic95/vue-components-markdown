@@ -1,12 +1,12 @@
 import VueMarkdown from 'vue-markdown'
 
 function getPropValue(prop, variables) {
-  const value = prop.split(':')[1].trim().replace(/'/g, '')
-  const isVariable = value.match(/^{{\w*}}$/)
+  const propValue = prop.split(': ')[1].trim().replace(/'/g, '')
+  const isVariable = propValue.match(/^{{\w*}}$/)
   if (isVariable) {
-    return variables[value.replace(/{|}/g, '')]
+    return variables[propValue.replace(/{|}/g, '')]
   }
-  return value
+  return JSON.parse(propValue)
 }
 
 function extractComponentConfig(component, variables) {
@@ -19,7 +19,7 @@ function extractComponentConfig(component, variables) {
   const componentName = componentConfig[0]
   const componentProps = componentConfig[1]
     .slice(1, -1)
-    .split(',')
+    .split(', ')
     .map((prop) => prop.trim())
     .reduce((val, item) => {
       const propName = item.split(':')[0]

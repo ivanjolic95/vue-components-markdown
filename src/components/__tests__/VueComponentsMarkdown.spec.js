@@ -16,6 +16,10 @@ const MyComponent = Vue.extend({
       type: String,
       required: true,
     },
+    config: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   render(h) {
     return h('div', { staticClass: 'MyComponent' }, [
@@ -37,7 +41,7 @@ describe('VueComponentsMarkdown', () => {
 
 This is a __test__.
 
-!<my-component { title: 'Title', text: '{{customText}}' }>
+!<my-component { title: '"Title"', text: '{{customText}}', config: '{"a":1,"b":{"c":"test"}}' }>
 
 Another regular markdown paragraph. This time with list items:
 - first
@@ -46,7 +50,7 @@ Another regular markdown paragraph. This time with list items:
   - subitem
 
 And back to the custom component:
-!<my-component { title: 'Title', text: '{{customText}}' }>`
+!<my-component { title: '"Title"', text: '{{customText}}' }>`
 
     variables = {
       customText: 'This is my custom text passed as a variable.',
@@ -87,6 +91,15 @@ And back to the custom component:
 
     test('sets prop with static value', () => {
       expect(wrapper.findComponent(MyComponent).props().title).toBe('Title')
+    })
+
+    test('sets prop with static JSON value to equivalent JS object', () => {
+      expect(wrapper.findComponent(MyComponent).props().config).toEqual({
+        a: 1,
+        b: {
+          c: 'test',
+        },
+      })
     })
 
     test('sets prop with dynamic value', () => {
