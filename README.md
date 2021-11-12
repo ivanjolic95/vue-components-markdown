@@ -4,6 +4,8 @@
 
 ## What is `vue-components-markdown`?
 
+![DEMO](src/assets/VueComponentsMarkdownDemo.gif)
+
 `vue-components-markdown` is a runtime markdown processor with support for injecting your custom Vue components into your markdown text.
 
 By default it uses [vue-markdown](https://github.com/miaolz123/vue-markdown) but you can handle markdown processing via [`markdown-processor` scoped slot](https://ivanjolic95.github.io/vue-components-markdown/#markdown-processor-scoped-slot).
