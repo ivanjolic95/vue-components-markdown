@@ -4,13 +4,18 @@
       <text-editor :content.sync="content" :variables.sync="variables" />
     </div>
     <div class="col">
-      <preview-renderer :content="content" :variables="variables" />
+      <preview-renderer
+        :content="content"
+        :variables="variables"
+        :component-map="componentMap"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import MyPoll from './components/MyPoll.vue'
+import YoutubeVideo from './components/YoutubeVideo.vue'
 import PreviewRenderer from './components/PreviewRenderer.vue'
 import TextEditor from './components/TextEditor.vue'
 
@@ -20,22 +25,17 @@ export default {
   data() {
     return {
       content: `
-# Test
+# Introduction
 
-This is some regular __markdown__ content.
+## What is Vue.js?
+Vue (pronounced /vjuː/, like __view__) is a __progressive framework__ for building user interfaces. Unlike other monolithic frameworks, Vue is designed from the ground up to be incrementally adoptable. The core library is focused on the view layer only, and is easy to pick up and integrate with other libraries or existing projects. On the other hand, Vue is also perfectly capable of powering sophisticated Single-Page Applications when used in combination with [modern tooling](https://v3.vuejs.org/guide/single-file-component.html) and [supporting libraries](https://github.com/vuejs/awesome-vue#components--libraries).
 
-## Subtitle
-
-And this is a list:
-- first
-- second
-- third
-
-And that's about it.
+If you’d like to learn more about Vue before diving in, we [created a video](https://v3.vuejs.org/guide/introduction.html#) walking through the core principles and a sample project.
 `,
       variables: {},
       componentMap: {
         'my-poll': MyPoll,
+        'youtube-video': YoutubeVideo,
       },
     }
   },
@@ -52,6 +52,7 @@ And that's about it.
   flex-grow: 1;
   height: 95vh;
   margin: 0 20px;
+  max-width: 50%;
 }
 
 ::v-deep button {

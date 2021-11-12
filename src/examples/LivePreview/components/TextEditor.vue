@@ -2,6 +2,7 @@
   <div class="TextEditor">
     <div class="TextEditor__Actions">
       <button @click="showPollModal = true">Append poll</button>
+      <button @click="showVideoModal = true">Append video</button>
     </div>
     <textarea
       :value="content"
@@ -10,15 +11,17 @@
 
     <!-- MODALS -->
     <append-poll-modal v-model="showPollModal" @submit="addPoll" />
+    <append-video-modal v-model="showVideoModal" @submit="addVideo" />
   </div>
 </template>
 
 <script>
 import AppendPollModal from './AppendPollModal.vue'
+import AppendVideoModal from './AppendVideoModal.vue'
 
 export default {
   name: 'TextEditor',
-  components: { AppendPollModal },
+  components: { AppendPollModal, AppendVideoModal },
   props: {
     content: {
       type: String,
@@ -28,6 +31,7 @@ export default {
   data() {
     return {
       showPollModal: false,
+      showVideoModal: false,
     }
   },
   methods: {
@@ -35,6 +39,13 @@ export default {
       const data = JSON.stringify(pollConfig)
       const pollComponent = `!<my-poll { config: '${data}' }>`
       this.$emit('update:content', `${this.content}\n\n${pollComponent}`)
+      this.showPollModal = false
+    },
+    addVideo(videoConfig) {
+      const data = JSON.stringify(videoConfig.youtubeVideoId)
+      const videoComponent = `!<youtube-video { videoId: '${data}' }>`
+      this.$emit('update:content', `${this.content}\n\n${videoComponent}`)
+      this.showVideoModal = false
     },
   },
 }
@@ -59,6 +70,7 @@ export default {
   border-radius: 10px;
   color: #ffffff;
   font-weight: 600;
+  margin-right: 20px;
 }
 
 textarea {

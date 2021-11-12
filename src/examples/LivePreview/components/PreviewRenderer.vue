@@ -4,13 +4,12 @@
       :content="content"
       :component-map="componentMap"
       :variables="variables"
+      no-component-wrapper
     />
   </div>
 </template>
 
 <script>
-import MyPoll from './MyPoll.vue'
-
 export default {
   name: 'PreviewRenderer',
   props: {
@@ -22,13 +21,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  },
-  data() {
-    return {
-      componentMap: {
-        'my-poll': MyPoll,
-      },
-    }
+    componentMap: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 }
 </script>
