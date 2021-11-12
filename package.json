@@ -12,7 +12,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name vue-components-markdown src/index.js",
-    "build:docs": "vue-cli-service build --name vue-components-markdown docs/src/main.js --dest docs/dist",
+    "build:docs": "vue-cli-service build --name vue-components-markdown src/docs/main.js --dest docs",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service test:unit --passWithNoTests"
   },

@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueComponentsMarkdownPlugin from '../../src/index'
+import VueComponentsMarkdownPlugin from '../index'
 import App from './App.vue'
 
 Vue.config.productionTip = false
