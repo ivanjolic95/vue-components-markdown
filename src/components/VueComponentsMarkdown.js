@@ -11,21 +11,24 @@ function getPropValue(prop, variables) {
 
 function extractComponentConfig(component, variables) {
   // split only by first space
-  const componentConfig = component
-    .match(/[^!<>]*/g)
-    .filter(Boolean)[0]
-    .match(/^(\S+)\s(.*)/)
-    .slice(1)
+  let componentConfig = component.match(/[^!<>]*/g).filter(Boolean)[0]
+  if (componentConfig.match(/^(\S+)\s(.*)/))
+    componentConfig = componentConfig.match(/^(\S+)\s(.*)/).slice(1)
+  else componentConfig = [componentConfig]
+
   const componentName = componentConfig[0]
+
   const componentProps = componentConfig[1]
-    .slice(1, -1)
-    .split(', ')
-    .map((prop) => prop.trim())
-    .reduce((val, item) => {
-      const propName = item.split(':')[0]
-      const propValue = getPropValue(item, variables)
-      return { ...val, [propName]: propValue }
-    }, {})
+    ? componentConfig[1]
+        .slice(1, -1)
+        .split(', ')
+        .map((prop) => prop.trim())
+        .reduce((val, item) => {
+          const propName = item.split(':')[0]
+          const propValue = getPropValue(item, variables)
+          return { ...val, [propName]: propValue }
+        }, {})
+    : {}
   return { componentName, componentProps }
 }
 
@@ -55,12 +58,15 @@ function renderComponent(
 }
 
 function splitMarkdownContentAndComponents(content) {
-  const COMPONENT_REGEX = /(!<.*>)/g
+  const COMPONENT_REGEX = /((?<!#)!<.*>)/g
+  const COMPONENT_EXAMPLE_REGEX = /(#!<.*>)/g
 
   return (
     content.split(COMPONENT_REGEX).map((paragraph) => ({
       isComponent: !!paragraph.match(COMPONENT_REGEX),
-      content: paragraph,
+      content: paragraph.match(COMPONENT_EXAMPLE_REGEX)
+        ? paragraph.replace(/#!</g, '!<')
+        : paragraph,
     })) || []
   )
 }
@@ -74,6 +80,7 @@ function injectComponents(
     noComponentWrapper,
     componentWrapperTag,
     componentWrapperClass,
+    markdownProcessorProps,
   },
   scopedSlots
 ) {
@@ -88,11 +95,16 @@ function injectComponents(
           variables,
           noComponentWrapper,
           componentWrapperTag,
-          componentWrapperClass
+          componentWrapperClass,
+          markdownProcessorProps
         )
       : (scopedSlots['markdown-processor'] &&
           scopedSlots['markdown-processor']({ content: paragraph.content })) ||
-        h(VueMarkdown, { props: { source: paragraph.content } }, [])
+        h(
+          VueMarkdown,
+          { props: { ...markdownProcessorProps, source: paragraph.content } },
+          []
+        )
   )
 
   return h('div', { staticClass: 'VueComponentsMarkdown' }, elements)
@@ -129,6 +141,10 @@ export default {
     componentWrapperClass: {
       type: String,
       default: '',
+    },
+    markdownProcessorProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
   render(h, { props, scopedSlots }) {

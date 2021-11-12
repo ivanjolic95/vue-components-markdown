@@ -76,5 +76,10 @@ export default {
 textarea {
   width: 100%;
   flex-grow: 1;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  font-family: 'Roboto Mono', monospace;
+  padding: 10px;
+  max-width: 100%;
 }
 </style>
