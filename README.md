@@ -1,29 +1,16 @@
 # vue-components-markdown
 
-## Project setup
-```
-yarn install
-```
+**Not tested with Vue3 yet**
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## What is `vue-components-markdown`?
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+`vue-components-markdown` is a runtime markdown processor with support for injecting your custom Vue components into your markdown text.
 
-### Run your tests
-```
-yarn run test
-```
+By default it uses [vue-markdown](https://github.com/miaolz123/vue-markdown) but you can handle markdown processing via [`markdown-processor` scoped slot](https://ivanjolic95.github.io/vue-components-markdown/#markdown-processor-scoped-slot).
 
-### Lints and fixes files
-```
-yarn run lint
-```
+## How to install?
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+`vue-components-markdown` is a Vue plugin that automatically registers the `vue-components-markdown` component in your component instances. More details [here](https://ivanjolic95.github.io/vue-components-markdown/#how-to-install).
+
+## Demo
+You can check the `LivePreview` example [here](https://ivanjolic95.github.io/vue-components-markdown/#example-livepreview).
