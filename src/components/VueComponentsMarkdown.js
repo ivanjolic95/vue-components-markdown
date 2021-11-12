@@ -34,6 +34,7 @@ function renderComponent(
   component,
   componentMap,
   variables,
+  noComponentWrapper,
   componentWrapperTag,
   componentWrapperClass
 ) {
@@ -41,9 +42,16 @@ function renderComponent(
     component,
     variables
   )
-  return h(componentWrapperTag, { staticClass: componentWrapperClass }, [
-    h(componentMap[componentName], { props: componentProps }, []),
-  ])
+  const componentElement = h(
+    componentMap[componentName],
+    { props: componentProps },
+    []
+  )
+  return noComponentWrapper
+    ? componentElement
+    : h(componentWrapperTag, { staticClass: componentWrapperClass }, [
+        componentElement,
+      ])
 }
 
 function splitMarkdownContentAndComponents(content) {
@@ -63,6 +71,7 @@ function injectComponents(
     content,
     componentMap,
     variables,
+    noComponentWrapper,
     componentWrapperTag,
     componentWrapperClass,
   },
@@ -77,6 +86,7 @@ function injectComponents(
           paragraph.content,
           componentMap,
           variables,
+          noComponentWrapper,
           componentWrapperTag,
           componentWrapperClass
         )
@@ -107,6 +117,10 @@ export default {
     variables: {
       type: Object,
       default: () => ({}),
+    },
+    noComponentWrapper: {
+      type: Boolean,
+      default: false,
     },
     componentWrapperTag: {
       type: String,
