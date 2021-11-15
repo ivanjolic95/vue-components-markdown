@@ -56,7 +56,7 @@ yarn add vue-components-markdown
 
 \`\`\`
 // main.js
-import VueComponentsMarkdownPlugin from '../index'
+import VueComponentsMarkdownPlugin from 'vue-components-markdown'
 
 // ...
 
