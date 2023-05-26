@@ -1,7 +1,7 @@
 <template>
   <div class="LivePreview row">
     <div class="col">
-      <text-editor :content.sync="content" :variables.sync="variables" />
+      <text-editor v-model:content="content" v-model:variables="variables" />
     </div>
     <div class="col">
       <preview-renderer
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { markRaw } from 'vue'
 import MyPoll from './components/MyPoll.vue'
 import YoutubeVideo from './components/YoutubeVideo.vue'
 import PreviewRenderer from './components/PreviewRenderer.vue'
@@ -33,8 +34,8 @@ If you’d like to learn more about Vue before diving in, we [created a video](h
 `,
       variables: {},
       componentMap: {
-        'my-poll': MyPoll,
-        'youtube-video': YoutubeVideo,
+        'my-poll': markRaw(MyPoll),
+        'youtube-video': markRaw(YoutubeVideo),
       },
     }
   },

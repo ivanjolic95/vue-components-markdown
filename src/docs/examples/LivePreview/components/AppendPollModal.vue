@@ -1,8 +1,8 @@
 <template>
   <simple-modal
-    :value="value"
+    :model-value="modelValue"
     title="Add poll"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
     @submit="handleSubmit"
   >
     <div class="AppendPollModal">
@@ -37,9 +37,10 @@ import SimpleModal from './SimpleModal.vue'
 
 export default {
   name: 'AppendPollModal',
+  emits: ['update:model-value', 'submit'],
   components: { SimpleModal },
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true,
     },

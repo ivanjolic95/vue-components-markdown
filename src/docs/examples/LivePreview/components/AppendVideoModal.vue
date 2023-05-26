@@ -1,8 +1,8 @@
 <template>
   <simple-modal
-    :value="value"
+    :model-value="modelValue"
     title="Add video"
-    @input="$emit('input', $event)"
+    @update:model-value="$emit('update:model-value', $event)"
     @submit="handleSubmit"
   >
     <div class="AppendVideoModal">
@@ -22,7 +22,7 @@ export default {
   name: 'AppendVideoModal',
   components: { SimpleModal },
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true,
     },
