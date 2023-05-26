@@ -36,12 +36,14 @@ export default {
   },
   methods: {
     addPoll(pollConfig) {
+      if (!pollConfig) return
       const data = JSON.stringify(pollConfig)
       const pollComponent = `!<my-poll { config: '${data}' }>`
       this.$emit('update:content', `${this.content}\n\n${pollComponent}`)
       this.showPollModal = false
     },
     addVideo(videoConfig) {
+      if (!videoConfig || !videoConfig.youtubeVideoId) return
       const data = JSON.stringify(videoConfig.youtubeVideoId)
       const videoComponent = `!<youtube-video { videoId: '${data}' }>`
       this.$emit('update:content', `${this.content}\n\n${videoComponent}`)

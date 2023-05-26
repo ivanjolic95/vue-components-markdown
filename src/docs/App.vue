@@ -8,15 +8,13 @@
       <vue-components-markdown
         :content="content"
         :component-map="componentMap"
-        :markdown-processor-props="{
-          toc: true,
-        }"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { markRaw } from 'vue'
 /* eslint-disable no-useless-escape */
 import LivePreview from './examples/LivePreview/LivePreview.vue'
 
@@ -29,8 +27,6 @@ const tocContent = `
   - [\`content\`](#content-prop)
   - [\`component-map\`](#component-map-prop)
   - [\`variables\`](#variables-prop)
-- [Scoped slots](#scoped-slots)
-  - [\`markdown-processor\`](#markdown-processor-scoped-slot)
 `
 
 const content = `
@@ -170,29 +166,6 @@ Here go the custom components:
   // ...
 }
 \`\`\`
-
----
-
-## Scoped slots
-
-| Name               | Default                    | Provided props                                 |
-| ------------------ | -------------------------- | ---------------------------------------------- |
-| markdown-processor | \`vue-markdown\` component | \`content\` - markdown content to be processed |
-
-### \`markdown-processor\` scoped slot
-
-By default markdown is rendered by [vue-markdown](https://github.com/miaolz123/vue-markdown) component.
-You can override this by using \`markdown-processor\` scoped slot and process the markdown content with other processor.
-
-In that case you can just use following syntax:
-
-\`\`\`
-<vue-components-markdown :content="myContent" :component-map="componentMap" :variables="variables">
-  <template #markdown-processor="{ content }">
-    <my-custom-markdown-processor>{{ content }}</my-custom-markdown-processor>
-  </template>
-</vue-components-markdown>
-\`\`\`
 `
 
 export default {
@@ -202,20 +175,18 @@ export default {
       tocContent: tocContent.trim(),
       content: content.trim(),
       componentMap: {
-        'live-preview': LivePreview,
+        'live-preview': markRaw(LivePreview),
       },
     }
   },
   created() {
     const head = document.getElementsByTagName('head')[0]
     let fontTag = document.createElement('link')
-    fontTag.href =
-      'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
+    fontTag.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
     fontTag.rel = 'stylesheet'
     head.appendChild(fontTag)
     fontTag = document.createElement('link')
-    fontTag.href =
-      'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap'
+    fontTag.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap'
     fontTag.rel = 'stylesheet'
     head.appendChild(fontTag)
   },

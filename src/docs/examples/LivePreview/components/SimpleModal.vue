@@ -1,5 +1,5 @@
 <template>
-  <div v-if="value" class="SimpleModalContainer">
+  <div v-if="modelValue" class="SimpleModalContainer">
     <div class="SimpleModal">
       <div class="SimpleModal__Title">
         {{ title }}
@@ -8,7 +8,7 @@
         <slot />
       </div>
       <div class="SimpleModal__Actions">
-        <button class="outlined" @click="$emit('input', false)">Close</button>
+        <button class="outlined" @click="$emit('update:model-value', false)">Close</button>
         <button @click="$emit('submit')">{{ submitBtnText }}</button>
       </div>
     </div>
@@ -19,7 +19,7 @@
 export default {
   name: 'SimpleModal',
   props: {
-    value: {
+    modelValue: {
       type: Boolean,
       required: true,
     },
