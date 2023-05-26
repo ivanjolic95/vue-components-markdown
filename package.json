@@ -17,25 +17,30 @@
     "test": "vue-cli-service test:unit --passWithNoTests"
   },
   "dependencies": {
-    "@vue/test-utils": "^1.2.2",
+    "@vue/test-utils": "^2.0.0",
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-markdown": "^2.2.4"
+    "vue": "3",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.0",
-    "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-plugin-unit-jest": "^4.5.15",
-    "@vue/cli-service": "^4.5.0",
+    "@babel/eslint-parser": "^7.21.8",
+    "@vue/cli-plugin-babel": "^5.0.0",
+    "@vue/cli-plugin-eslint": "^5.0.0",
+    "@vue/cli-plugin-unit-jest": "^5.0.0",
+    "@vue/cli-service": "^5.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.6.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.6.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^25.2.4",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.0.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-loader": "^3.0.3",
+    "eslint-plugin-cypress": "^2.11.1",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^9.14.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

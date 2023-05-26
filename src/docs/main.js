@@ -1,11 +1,9 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 import VueComponentsMarkdownPlugin from '../index'
 import App from './App.vue'
 
-Vue.config.productionTip = false
+const app = createApp(App)
 
-Vue.use(VueComponentsMarkdownPlugin)
+app.use(VueComponentsMarkdownPlugin)
 
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app')
+app.mount('#app')
