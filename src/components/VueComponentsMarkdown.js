@@ -1,4 +1,16 @@
-import VueMarkdown from 'vue-markdown'
+import { h, markRaw } from 'vue'
+import emoji from 'markdown-it-emoji'
+import subscript from 'markdown-it-sub'
+import superscript from 'markdown-it-sup'
+import footnote from 'markdown-it-footnote'
+import deflist from 'markdown-it-deflist'
+import abbreviation from 'markdown-it-abbr'
+import insert from 'markdown-it-ins'
+import mark from 'markdown-it-mark'
+import toc from 'markdown-it-toc-and-anchor'
+import katex from 'markdown-it-katex'
+import tasklists from 'markdown-it-task-lists'
+import Markdown from 'vue3-markdown-it'
 
 function getPropValue(prop, variables) {
   const propValue = prop.split(': ')[1].trim().replace(/'/g, '')
@@ -12,49 +24,46 @@ function getPropValue(prop, variables) {
 function extractComponentConfig(component, variables) {
   // split only by first space
   let componentConfig = component.match(/[^!<>]*/g).filter(Boolean)[0]
-  if (componentConfig.match(/^(\S+)\s(.*)/))
-    componentConfig = componentConfig.match(/^(\S+)\s(.*)/).slice(1)
+  if (componentConfig.match(/^(\S+)\s(.*)/)) componentConfig = componentConfig.match(/^(\S+)\s(.*)/).slice(1)
   else componentConfig = [componentConfig]
 
   const componentName = componentConfig[0]
 
   const componentProps = componentConfig[1]
     ? componentConfig[1]
-        .slice(1, -1)
-        .split(', ')
-        .map((prop) => prop.trim())
-        .reduce((val, item) => {
-          const propName = item.split(':')[0]
-          const propValue = getPropValue(item, variables)
-          return { ...val, [propName]: propValue }
-        }, {})
+      .slice(1, -1)
+      .split(', ')
+      .map((prop) => prop.trim())
+      .reduce((val, item) => {
+        const propName = item.split(':')[0]
+        const propValue = getPropValue(item, variables)
+        return { ...val, [propName]: propValue }
+      }, {})
     : {}
   return { componentName, componentProps }
 }
 
 function renderComponent(
-  h,
   component,
   componentMap,
   variables,
   noComponentWrapper,
   componentWrapperTag,
-  componentWrapperClass
+  componentWrapperClass,
 ) {
   const { componentName, componentProps } = extractComponentConfig(
     component,
-    variables
+    variables,
   )
   const componentElement = h(
-    componentMap[componentName],
-    { props: componentProps },
-    []
+    markRaw(componentMap[componentName]),
+    { ...componentProps },
   )
-  return noComponentWrapper
+  return (noComponentWrapper
     ? componentElement
-    : h(componentWrapperTag, { staticClass: componentWrapperClass }, [
-        componentElement,
-      ])
+    : h(componentWrapperTag, { class: componentWrapperClass }, [
+      componentElement,
+    ]))
 }
 
 function splitMarkdownContentAndComponents(content) {
@@ -72,7 +81,6 @@ function splitMarkdownContentAndComponents(content) {
 }
 
 function injectComponents(
-  h,
   {
     content,
     componentMap,
@@ -82,36 +90,29 @@ function injectComponents(
     componentWrapperClass,
     markdownProcessorProps,
   },
-  scopedSlots
 ) {
   const paragraphs = splitMarkdownContentAndComponents(content)
 
-  const elements = paragraphs.map((paragraph) =>
-    paragraph.isComponent
-      ? renderComponent(
-          h,
-          paragraph.content,
-          componentMap,
-          variables,
-          noComponentWrapper,
-          componentWrapperTag,
-          componentWrapperClass,
-          markdownProcessorProps
-        )
-      : (scopedSlots['markdown-processor'] &&
-          scopedSlots['markdown-processor']({ content: paragraph.content })) ||
-        h(
-          VueMarkdown,
-          { props: { ...markdownProcessorProps, source: paragraph.content } },
-          []
-        )
-  )
+  const elements = paragraphs.map((paragraph) => (paragraph.isComponent
+    ? renderComponent(
+      paragraph.content,
+      markRaw(componentMap),
+      variables,
+      noComponentWrapper,
+      componentWrapperTag,
+      componentWrapperClass,
+      markdownProcessorProps,
+    )
+    : h(
+      markRaw(Markdown),
+      { ...markdownProcessorProps, source: paragraph.content, plugins: [emoji, subscript, superscript, footnote, deflist, abbreviation, insert, mark, toc, katex, tasklists].map((plugin) => ({ plugin })) },
+    )))
 
-  return h('div', { staticClass: 'VueComponentsMarkdown' }, elements)
+  return h('div', { class: 'VueComponentsMarkdown' }, elements)
 }
 
-function renderBlocks(h, props, scopedSlots) {
-  return injectComponents(h, props, scopedSlots)
+function renderBlocks(props) {
+  return injectComponents(props)
 }
 
 export default {
@@ -147,7 +148,7 @@ export default {
       default: () => ({}),
     },
   },
-  render(h, { props, scopedSlots }) {
-    return renderBlocks(h, props, scopedSlots)
+  render(props) {
+    return renderBlocks(props)
   },
 }

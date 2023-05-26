@@ -5,8 +5,17 @@ exports[`VueComponentsMarkdown Rendering renders properly 1`] = `
   class="VueComponentsMarkdown"
 >
   <div>
-    <h1>
-      This is a title
+    <h1
+      id="this-is-a-title"
+      tabindex="-1"
+    >
+      <a
+        class="markdownIt-Anchor"
+        href="#this-is-a-title"
+      >
+        #
+      </a>
+       This is a title
     </h1>
     
 
@@ -24,7 +33,7 @@ exports[`VueComponentsMarkdown Rendering renders properly 1`] = `
     class=""
   >
     <div
-      class="MyComponent"
+      staticclass="MyComponent"
     >
       <h1>
         Title
@@ -86,7 +95,7 @@ exports[`VueComponentsMarkdown Rendering renders properly 1`] = `
     class=""
   >
     <div
-      class="MyComponent"
+      staticclass="MyComponent"
     >
       <h1>
         Title

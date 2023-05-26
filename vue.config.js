@@ -1,3 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/vue-components-markdown/' : '/',
+  publicPath:
+    process.env.NODE_ENV === 'production' ? '/vue-components-markdown/' : '/',
+  lintOnSave: false,
 }

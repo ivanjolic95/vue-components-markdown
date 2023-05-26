@@ -8,15 +8,13 @@
       <vue-components-markdown
         :content="content"
         :component-map="componentMap"
-        :markdown-processor-props="{
-          toc: true,
-        }"
       />
     </div>
   </div>
 </template>
 
 <script>
+import { markRaw } from 'vue'
 /* eslint-disable no-useless-escape */
 import LivePreview from './examples/LivePreview/LivePreview.vue'
 
@@ -202,20 +200,18 @@ export default {
       tocContent: tocContent.trim(),
       content: content.trim(),
       componentMap: {
-        'live-preview': LivePreview,
+        'live-preview': markRaw(LivePreview),
       },
     }
   },
   created() {
     const head = document.getElementsByTagName('head')[0]
     let fontTag = document.createElement('link')
-    fontTag.href =
-      'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
+    fontTag.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap'
     fontTag.rel = 'stylesheet'
     head.appendChild(fontTag)
     fontTag = document.createElement('link')
-    fontTag.href =
-      'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap'
+    fontTag.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap'
     fontTag.rel = 'stylesheet'
     head.appendChild(fontTag)
   },

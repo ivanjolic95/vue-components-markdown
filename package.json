@@ -1,46 +1,59 @@
 {
   "name": "vue-components-markdown",
   "version": "0.0.3",
-  "license": "MIT",
   "description": "Runtime markdown processor with support for injecting your custom Vue components into your markdown text.",
   "author": "Ivan Jolic <ivan.jolic1995@gmail.com>",
+  "scripts": {
+    "serve": "vue-cli-service serve src/docs/main.js",
+    "build": "vue-cli-service build --target lib --name vue-components-markdown src/index.js",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "build:docs": "vue-cli-service build --name vue-components-markdown src/docs/main.js --dest docs"
+  },
   "main": "dist/vue-components-markdown.common.js",
   "files": [
     "dist/*",
     "src/*"
   ],
-  "scripts": {
-    "serve": "vue-cli-service serve src/docs/main.js",
-    "build": "vue-cli-service build --target lib --name vue-components-markdown src/index.js",
-    "build:docs": "vue-cli-service build --name vue-components-markdown src/docs/main.js --dest docs",
-    "lint": "vue-cli-service lint",
-    "test": "vue-cli-service test:unit --passWithNoTests"
-  },
   "dependencies": {
-    "@vue/test-utils": "^1.2.2",
     "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11",
-    "vue-markdown": "^2.2.4"
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-deflist": "^2.1.0",
+    "markdown-it-emoji": "^2.0.2",
+    "markdown-it-footnote": "^3.0.3",
+    "markdown-it-ins": "^3.0.1",
+    "markdown-it-katex": "^2.0.3",
+    "markdown-it-mark": "^3.0.1",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "markdown-it-toc-and-anchor": "^4.2.0",
+    "vue": "3",
+    "vue3-markdown-it": "^1.0.10"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.0",
-    "@vue/cli-plugin-eslint": "^4.5.0",
-    "@vue/cli-plugin-unit-jest": "^4.5.15",
-    "@vue/cli-service": "^4.5.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.6.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jest": "^25.2.4",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.0.1",
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.21.8",
+    "@vue/cli-plugin-babel": "^5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/cli-service": "^5.0.0",
+    "@vue/eslint-config-airbnb": "^6.0.0",
+    "@vue/test-utils": "^2.0.0-0",
+    "@vue/vue3-jest": "^27.0.0-alpha.1",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-vue": "^8.0.3",
+    "eslint-plugin-vuejs-accessibility": "^1.1.0",
+    "jest": "^27.0.5",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "license": "MIT"
 }

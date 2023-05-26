@@ -1,11 +1,9 @@
-import Vue from 'vue'
+import { h, markRaw } from 'vue'
 import { mount, shallowMount } from '@vue/test-utils'
-
-import VueMarkdown from 'vue-markdown'
 
 import VueComponentsMarkdown from '../VueComponentsMarkdown'
 
-const MyComponent = Vue.extend({
+const MyComponent = markRaw({
   name: 'MyComponent',
   props: {
     title: {
@@ -21,7 +19,7 @@ const MyComponent = Vue.extend({
       default: () => ({}),
     },
   },
-  render(h) {
+  render() {
     return h('div', { staticClass: 'MyComponent' }, [
       h('h1', [this.title]),
       h('p', [this.text]),
@@ -57,7 +55,7 @@ And back to the custom component:
     }
 
     wrapper = shallowMount(VueComponentsMarkdown, {
-      propsData: {
+      props: {
         content,
         componentMap: {
           'my-component': MyComponent,
@@ -70,7 +68,7 @@ And back to the custom component:
   describe('Rendering', () => {
     beforeEach(() => {
       wrapper = mount(VueComponentsMarkdown, {
-        propsData: {
+        props: {
           content,
           componentMap: {
             'my-component': MyComponent,
@@ -104,19 +102,19 @@ And back to the custom component:
 
     test('sets prop with dynamic value', () => {
       expect(wrapper.findComponent(MyComponent).props().text).toBe(
-        'This is my custom text passed as a variable.'
+        'This is my custom text passed as a variable.',
       )
     })
 
     test('uses `div` as wrapper element for custom components by default', () => {
       expect(
-        wrapper.findComponent(MyComponent).element.parentElement.tagName
+        wrapper.findComponent(MyComponent).element.parentElement.tagName,
       ).toBe('DIV')
     })
 
     test('uses `componentWrapperTag` as wrapper element for custom components', () => {
       wrapper = mount(VueComponentsMarkdown, {
-        propsData: {
+        props: {
           content,
           componentMap: {
             'my-component': MyComponent,
@@ -126,13 +124,13 @@ And back to the custom component:
         },
       })
       expect(
-        wrapper.findComponent(MyComponent).element.parentElement.tagName
+        wrapper.findComponent(MyComponent).element.parentElement.tagName,
       ).toBe('P')
     })
 
     test('uses `componentWrapperClass` as class attribute for wrapper element for custom components', () => {
       wrapper = mount(VueComponentsMarkdown, {
-        propsData: {
+        props: {
           content,
           componentMap: {
             'my-component': MyComponent,
@@ -142,32 +140,8 @@ And back to the custom component:
         },
       })
       expect(
-        wrapper.findComponent(MyComponent).element.parentElement.classList
+        wrapper.findComponent(MyComponent).element.parentElement.classList,
       ).toContain('test-class')
-    })
-  })
-
-  describe('using custom markdown processor', () => {
-    test('uses `VueMarkdown` for processing markdown by default', () => {
-      expect(wrapper.findComponent(VueMarkdown).exists()).toBeTruthy()
-    })
-
-    test('uses custom markdown processor if provided as `markdown-processor` scoped slot', () => {
-      wrapper = shallowMount(VueComponentsMarkdown, {
-        propsData: {
-          content,
-          componentMap: {
-            'my-component': MyComponent,
-          },
-          variables,
-        },
-        scopedSlots: {
-          'markdown-processor':
-            '<p>This is a custom markdown processor: {{props.content}}</p>',
-        },
-      })
-
-      expect(wrapper.text()).toContain('This is a custom markdown processor')
     })
   })
 })
