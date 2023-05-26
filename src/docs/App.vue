@@ -27,8 +27,6 @@ const tocContent = `
   - [\`content\`](#content-prop)
   - [\`component-map\`](#component-map-prop)
   - [\`variables\`](#variables-prop)
-- [Scoped slots](#scoped-slots)
-  - [\`markdown-processor\`](#markdown-processor-scoped-slot)
 `
 
 const content = `
@@ -167,29 +165,6 @@ Here go the custom components:
   },
   // ...
 }
-\`\`\`
-
----
-
-## Scoped slots
-
-| Name               | Default                    | Provided props                                 |
-| ------------------ | -------------------------- | ---------------------------------------------- |
-| markdown-processor | \`vue-markdown\` component | \`content\` - markdown content to be processed |
-
-### \`markdown-processor\` scoped slot
-
-By default markdown is rendered by [vue-markdown](https://github.com/miaolz123/vue-markdown) component.
-You can override this by using \`markdown-processor\` scoped slot and process the markdown content with other processor.
-
-In that case you can just use following syntax:
-
-\`\`\`
-<vue-components-markdown :content="myContent" :component-map="componentMap" :variables="variables">
-  <template #markdown-processor="{ content }">
-    <my-custom-markdown-processor>{{ content }}</my-custom-markdown-processor>
-  </template>
-</vue-components-markdown>
 \`\`\`
 `
 
